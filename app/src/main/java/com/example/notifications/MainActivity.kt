@@ -9,6 +9,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showNotification(view: View) {
+        if(!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
+            Snackbar.make(content, "Notifications are disabled", Snackbar.LENGTH_SHORT).show()
+        }
+
         val builder = NotificationCompat.Builder(this, "channel")
                 .setSmallIcon(R.drawable.ic_star)
                 .setContentTitle("My notification")
